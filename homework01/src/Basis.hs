@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
 -- |
 --
--- CIS 194 Spring 2013: Homework 01 test
+-- CIS 194 Spring 2013: Homework 01
 --
 ----------------------------------------------------------------------
 
@@ -21,7 +21,14 @@ module Basis where
 -- []
 
 toDigits :: Integer -> [Integer]
-toDigits = undefined
+--  toDigits = undefined
+toDigits n
+    | n <= 0 = []
+    | otherwise = map convertCharToInteger(show n)
+    where convertCharToInteger c = read[c]::Integer
+
+
+
 
 ----------------------------------------------------------------------
 -- Exercise 2
@@ -35,7 +42,16 @@ toDigits = undefined
 -- [1,4,3]
 
 doubleEveryOther :: [Integer] -> [Integer]
-doubleEveryOther = undefined
+--doubleEveryOther = undefined
+doubleEveryOther [] = []
+doubleEveryOther n = reverse (f n)
+    where
+        serie= 1:2:serie
+        f = zipWith (*) serie.reverse
+
+
+
+
 
 ----------------------------------------------------------------------
 -- Exercise 3
