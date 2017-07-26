@@ -83,6 +83,7 @@ validate :: Integer -> Bool
 validate x = if  mod (f x) 10 == 0 then True else False
     where
         f = sumDigits.doubleEveryOther.toDigits
+
 --validate x = [\x -> if  mod ((sumDigits.doubleEveryOther.toDigits)x) 10 == 0 then True else False]
 
 ----------------------------------------------------------------------
@@ -98,7 +99,13 @@ type Move = (Peg, Peg)
 -- [("a","c"),("a","b"),("c","b")]
 
 hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
-hanoi = undefined
+-- hanoi = undefined
+hanoi n a b c
+   | n <= 0     = []
+   | n == 1     = [(a,b)]
+   | otherwise = hanoi m a c b ++ hanoi 1 a b c ++ hanoi m c b a
+        where
+            m=n-1
 
 ----------------------------------------------------------------------
 -- Exercise 6 (Optional)
