@@ -63,7 +63,9 @@ doubleEveryOther n = reverse (f n)
 -- 22
 
 sumDigits :: [Integer] -> Integer
-sumDigits = undefined
+--sumDigits = undefined
+sumDigits = sum.map(sum.toDigits)
+
 
 ----------------------------------------------------------------------
 -- Exercise 4
@@ -77,7 +79,11 @@ sumDigits = undefined
 -- False
 
 validate :: Integer -> Bool
-validate = undefined
+--validate = undefined
+validate x = if  mod (f x) 10 == 0 then True else False
+    where
+        f = sumDigits.doubleEveryOther.toDigits
+--validate x = [\x -> if  mod ((sumDigits.doubleEveryOther.toDigits)x) 10 == 0 then True else False]
 
 ----------------------------------------------------------------------
 -- Exercise 5
