@@ -9,7 +9,7 @@
 
 module LogAnalysis where
 
-import Log
+import           Log
 
 ----------------------------------------------------------------------
 -- Exercise 1
@@ -25,7 +25,26 @@ import Log
 -- Unknown "This is not in the right format"
 
 parseMessage :: String -> LogMessage
-parseMessage = undefined
+--parseMessage = undefined
+parseMessage m = case messageCode of
+                   "E" -> LogMessage (Error errorCode) timeStamp stringMessage
+                   "I" -> LogMessage Info timeStamp stringMessage
+                   "W" -> LogMessage Warning timeStamp stringMessage
+                   _ -> Unknown stringMessage
+    where
+        messageWord= words m
+        messageCode= head messageWord
+        index = case messageCode of
+                   "E" -> 2
+                   "I" -> 1
+                   "W" -> 1
+                   _   -> -1
+        stringMessage = unwords( drop (index+1) messageWord)
+        timeStamp = read (messageWord!!index):: Int
+        errorCode = read (messageWord!!1) :: Int
+
+
+
 
 parse :: String -> [LogMessage]
 parse = undefined
