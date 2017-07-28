@@ -46,8 +46,22 @@ parseMessage m = case messageCode of
 
 
 
+
 parse :: String -> [LogMessage]
-parse = undefined
+--parse :: String -> [String]
+--parse = undefined
+parse [] = []
+parse n = xz :  parse rest
+    where
+      listSr = words n
+      head1 = head listSr
+      head'= unwords (takeWhile (\ x -> x /= "E" && x/="W" && x/="I" ) (tail listSr))
+      head''= head1 ++" "++ head'
+      index'= length head'' + 1
+      rest = drop index' n
+      xz= parseMessage head''
+
+-------testParse parse 10 "sample.log"
 
 ----------------------------------------------------------------------
 -- Exercise 2
