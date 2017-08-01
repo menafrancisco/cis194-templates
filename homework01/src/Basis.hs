@@ -80,7 +80,7 @@ sumDigits = sum.map(sum.toDigits)
 
 validate :: Integer -> Bool
 --validate = undefined
-validate x = if  mod (f x) 10 == 0 then True else False
+validate x = mod (f x) 10 == 0
     where
         f = sumDigits.doubleEveryOther.toDigits
 
