@@ -24,8 +24,19 @@ module Golf where
 -- >>> skips []
 -- []
 
+f ::[a] -> Int-> [a]
+f   []   _ = []
+f (x:xs) n = x: (f $ drop m xs) n
+    where m = n - 1
+
 skips :: [a] -> [[a]]
-skips = undefined
+skips = skips' 0
+
+
+skips' ::Int -> [a] -> [[a]]
+skips' _ [] = []
+skips' n l@(_:xs) =  f l m : skips' m xs
+    where m =n+1
 
 ----------------------------------------------------------------------
 -- Exercise 2
