@@ -35,10 +35,11 @@ fun2 n
 -- False
 
 fun1' :: [Integer] -> Integer
-fun1' = undefined
+fun1' = foldl (\acc x -> if even x then (x-2)*acc else acc ) 1
 
 fun2' :: Integer -> Integer
-fun2' = undefined
+fun2' n = foldl (\acc x -> if even x then x+acc else acc) 0 $ takeWhile (>1) $ iterate (\x -> if even x then x `div` 2 else 3*x + 1 ) n
+
 
 ----------------------------------------------------------------------
 -- Exercise 2
@@ -49,8 +50,16 @@ data Tree a =
   | Node Integer (Tree a) a (Tree a)
     deriving (Show, Eq)
 
-foldTree :: [a] -> Tree a
-foldTree = undefined
+foldTree :: Eq a => [a] -> Tree a
+foldTree xs = foldr (insertChild start) Leaf xs
+  where start = floor (logBase 2 $ fromIntegral(length xs)::Double)
+
+insertChild :: Int -> a -> Tree a -> Tree a
+insertChild _ _ _ = Leaf
+-- insertChild _ x (Node n left y right)
+--           | right == Leaf = Node n left y (Node (n-1) Leaf x Leaf)
+--           | otherwise = Node n (Node (n-1) Leaf x Leaf) y right
+-- insertChild start x _ = Node start Leaf x Leaf
 
 ----------------------------------------------------------------------
 -- Exercise 3
@@ -64,7 +73,8 @@ foldTree = undefined
 -- False
 
 xor :: [Bool] -> Bool
-xor = undefined
+xor = foldr xor2 False
+  where xor2 x y = (x || y) && not (x && y)
 
 -- |
 --
@@ -72,12 +82,12 @@ xor = undefined
 -- [2,3,4]
 
 map' :: (a -> b) -> [a] -> [b]
-map' = undefined
+map' f = foldr (\x acc -> f x : acc) []
 
 -- Optional
 
 myFoldl :: (a -> b -> a) -> a -> [b] -> a
-myFoldl = undefined
+myFoldl f x = foldr (flip f) x . reverse
 
 ----------------------------------------------------------------------
 -- Exercise 4
