@@ -95,3 +95,10 @@ myFoldl f x = foldr (flip f) x . reverse
 
 sieveSundaram :: Integer -> [Integer]
 sieveSundaram = undefined
+-- sieveSundaram n = map ((+1) . (*2)) $ [1..n] \\ sudaram
+--   where sudaram = map (\(i, j) -> i + j + 2*i*j)
+--                 . filter (\(i, j) -> i + j + 2*i*j <= n) $ cartProd [1..n] [1..n]
+
+-- -- Return all possible pairs
+-- cartProd :: [a] -> [b] -> [(a, b)]
+-- cartProd xs ys = [(x,y) | x <- xs, y <- ys]
