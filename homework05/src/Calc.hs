@@ -1,5 +1,5 @@
+{-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE FlexibleInstances #-}
 
 ----------------------------------------------------------------------
 -- |
@@ -10,10 +10,10 @@
 
 module Calc where
 
-import ExprT
-import Parser
-import StackVM
 import qualified Data.Map as M
+import           ExprT
+import           Parser
+import           StackVM
 
 ----------------------------------------------------------------------
 -- Exercise 1
@@ -25,8 +25,9 @@ import qualified Data.Map as M
 -- True
 
 eval :: ExprT -> Integer
-eval = undefined
-
+eval (Lit x)         = x
+eval (ExprT.Add x y) = eval x + eval y
+eval (ExprT.Mul x y) = eval x * eval y
 
 ----------------------------------------------------------------------
 -- Exercise 2
